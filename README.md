@@ -5,6 +5,8 @@ Why even bother with a non-BERT / Transformer languag model? Short answer: you c
 
 I also saw this paper on the roadmap for fast.ai 2.3 [Single Headed Attention RNN: Stop Thinking With Your Head](https://arxiv.org/abs/1911.11423) which could improve the performance further. 
 
+This Repo is based on the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
+
 ## Pretrained models
 
 **German / Deutsch**  
