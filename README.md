@@ -1,4 +1,4 @@
-# fast.ai ULMFiT from pretraining to deployment
+# fast.ai ULMFiT with SentencePiece from pretraining to deployment
 
 **Motivation:**
 Why even bother with a non-BERT / Transformer languag model? Short answer: you can train a state of the art text classifier with ULMFiT with limited data and affordable hardware. The whole process (preparing the Wikipedia dump, pretrain the language model, fine tune the language model and training the classifier) takes about 5 hours on my workstation with a RTX 3090. The training of the model with FP16 requires less than 8 GB VRAM - so you can train the model on affordable GPUs.
@@ -8,7 +8,7 @@ I also saw this paper on the roadmap for fast.ai 2.3 [Single Headed Attention RN
 ## Pretrained models
 
 **German / Deutsch**  
-Vocab size 15000 trained on 160k German Wikipedia-Articles (forward + backward model)
+Vocab size 15000 (SentencePiece tokenizer) trained on 160k German Wikipedia-Articles (forward + backward model)
 https://tinyurl.com/ulmfit-dewiki
 
 ## Setup 
