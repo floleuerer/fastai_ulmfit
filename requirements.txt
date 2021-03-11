@@ -1,3 +1,4 @@
 fastai==2.2.7
 fastcore==1.3.19
 sentencepiece==0.1.95
+fastinference==0.0.36

@@ -22,8 +22,10 @@ https://tinyurl.com/ulmfit-dewiki
 fastai-2.2.7
 fastcore-1.3.19
 sentencepiece-0.1.95
+fastinference-0.0.36
 ```
-Install packages
+
+**Install packages**
 `pip install -r requirements.txt`
 
 The trained language models are compatible with other fastai versions!
@@ -34,18 +36,18 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
 
 
 ## Project structure
-/we (Docker image for the preperation of the Wikipedia-dump / wikiextractor)
-/data 
-- /{language-code}wiki (created during preperation)
-  - /dump (downloaded Wikipedia dump)
-    - extract (extract text using wikiextractor)
-  - /docs 
-    - /all (all extracted Wikipedia articles as txt-files)
-    - /sampled (sampled Wikipedia articles for language model pretraining)
-  - /model
-    - lm (language model trained in step 2)
-    - ft (fine tuned model trained in step 3)
-    - class (classifier trained in step 4)
+- /we (Docker image for the preperation of the Wikipedia-dump / wikiextractor)
+- /data 
+  - /{language-code}wiki (created during preperation)
+    - /dump (downloaded Wikipedia dump)
+      - extract (extract text using wikiextractor)
+    - /docs 
+      - /all (all extracted Wikipedia articles as txt-files)
+      - /sampled (sampled Wikipedia articles for language model pretraining)
+    - /model
+      - lm (language model trained in step 2)
+      - ft (fine tuned model trained in step 3)
+      - class (classifier trained in step 4)
 
 # Pretraining, Fine-Tuning and training of the Classifier 
 
