@@ -67,8 +67,8 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
         │   └── spm            SentencePiece model
         │
         └── class              classifier trained in step 4
-        │   ├── fwd            forward learner
-        │   ├── bwd            backwards learner
+            ├── fwd            forward learner
+            └── bwd            backwards learner
 ````
 
 
