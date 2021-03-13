@@ -5,13 +5,20 @@ Why even bother with a non-BERT / Transformer languag model? Short answer: you c
 
 I also saw this paper on the roadmap for fast.ai 2.3 [Single Headed Attention RNN: Stop Thinking With Your Head](https://arxiv.org/abs/1911.11423) which could improve the performance further. 
 
-This Repo is based on the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
+This Repo is based on: 
+- https://github.com/fastai/fastai
+- [ULMFiT Paper](https://arxiv.org/abs/1801.06146)
+- the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
+
 
 ## Pretrained models
 
-**German / Deutsch**  
-Vocab size 15000 (SentencePiece tokenizer) trained on 160k German Wikipedia-Articles (forward + backward model)
-https://tinyurl.com/ulmfit-dewiki
+| Language  | code  | Perplexity  | Download |
+|---|---|---|---|
+| German  | de  | 16.1  | https://tinyurl.com/ulmfit-dewiki |
+| Dutch | nl  | 20.5  | https://tinyurl.com/ulmfit-nlwiki |
+| Russian | ru  | 29.8  | https://tinyurl.com/ulmfit-ruwiki |
+
 
 ## Setup 
 
@@ -36,31 +43,47 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
 
 
 ## Project structure
-- /we (Docker image for the preperation of the Wikipedia-dump / wikiextractor)
-- /data 
-  - /{language-code}wiki (created during preperation)
-    - /dump (downloaded Wikipedia dump)
-      - extract (extract text using wikiextractor)
-    - /docs 
-      - /all (all extracted Wikipedia articles as txt-files)
-      - /sampled (sampled Wikipedia articles for language model pretraining)
-    - /model
-      - lm (language model trained in step 2)
-      - ft (fine tuned model trained in step 3)
-      - class (classifier trained in step 4)
+
+````
+.
+├── we                         Docker image for the preperation of the Wikipedia-dump / wikiextractor
+└── data          
+    ├── {language-code}wiki    created during preperation
+    │    └── dump              downloaded Wikipedia dump
+    │        └── extract       extracted text using wikiextractor
+    ├── docs 
+    │   ├── all                all extracted Wikipedia articles as single txt-files
+    │   ├── sampled            (ampled Wikipedia articles for language model pretraining
+    │   └── sampled_tok        cached tokenized sampled articles - created by fastai / sentencepiece
+    └── model 
+        ├── lm                 language model trained in step 2
+        │   ├── fwd            forward model
+        │   ├── bwd            backwards model
+        │   └── spm            SentencePiece model
+        │
+        ├── ft                 fine tuned model trained in step 3
+        │   ├── fwd            forward model
+        │   ├── bwd            backwards model
+        │   └── spm            SentencePiece model
+        │
+        └── class              classifier trained in step 4
+        │   ├── fwd            forward learner
+        │   ├── bwd            backwards learner
+````
+
 
 # Pretraining, Fine-Tuning and training of the Classifier 
 
 ## 1. Prepare Wikipedia-dump for pretraining
 
-ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need hughe amounts of training data). The easiest way is to pretrain a language model on Wikipedia.
+ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.
 
-The code for the preperation steps is heavily inspired by the fast.ai NLP Course: https://github.com/fastai/course-nlp/blob/master/nlputils.py
+The code for the preperation steps is heavily inspired by / copied from the **fast.ai NLP-course**: https://github.com/fastai/course-nlp/blob/master/nlputils.py
 
 I built a docker container and script, that automates the following steps:
 1) Download Wikipedia XML-dump
 2) Extract the text from the dump
-3) Sample 160.000 documents with a minimum length of 1800 characters (results in 100m-120m tokens)
+3) Sample 160.000 documents with a minimum length of 1800 characters (results in 100m-120m tokens) both parameters can be changed - see the usage below
 
 The whole process will take some time depending on the download speed and your hardware. For the 'dewiki' the preperation took about 45 min.
 
@@ -77,7 +100,11 @@ docker run -v $(pwd)/data:/data -it wikiextractor -l de
 sucessfully prepared dewiki - /data/dewiki/docs/sampled, number of docs 160000/160000 with 110699119 words / tokens!
 
 # To change the number of sampled documents or the minimum length see
-usage: preprocess.py [-h] -l LANG [-n NUMBER_DOCS] [-m MIN_DOC_LENGTH] [--mirror MIRROR]
+usage: preprocess.py [-h] -l LANG [-n NUMBER_DOCS] [-m MIN_DOC_LENGTH] [--mirror MIRROR] [--cleanup]
+
+# To cleanup indermediate files (wikiextractor and all splitted documents) run the following command. 
+# The Wikipedia-XML-Dump and the sampled docs will not be deleted!
+docker run -v $(pwd)/data:/data -it wikiextractor -l <language-code> --cleanup
 ```
 
 The Docker image will create the following folders
@@ -88,6 +115,8 @@ Notebook: `2_ulmfit_lm_pretraining.ipynb`
 
 To get the best result, you can train two seperate language models - a forward and a backward model. You'll have to run the complete notebook twice and set the `backwards` parameter accordingly. The models will be saved in seperate folders (fwd / bwd). The same applies to fine-tuning and training of the classifier.
 
+### Parameters 
+
 Change the following parameters according to your needs:
 ```
 lang = 'de' # language of the Wikipedia-Dump
@@ -97,12 +126,44 @@ vocab_sz = 15000 # vocab size - 15k / 30k work fine with sentence piece
 num_workers=18 # num_workers for the dataloaders
 step = 'lm' # language model - don't change
 ```
+### Logfiles
+
+`train_params.json` contains the **parameters** the language model was trained with and the **statistics** (looses and metrics) of the last epoch 
+```json
+{
+    "lang": "de",
+    "step": "lm",
+    "backwards": false,
+    "batch_size": 128,
+    "vocab_size": 15000,
+    "lr": 0.01,
+    "num_epochs": 10,
+    "drop_mult": 0.5,
+    "stats": {
+        "train_loss": 2.894167184829712,
+        "valid_loss": 2.7784812450408936,
+        "accuracy": 0.46221256256103516,
+        "perplexity": 16.094558715820312
+    }
+}
+```
+
+`history.csv` log of the training metrics (epochs, losses, accuracy, perplexity)
+```
+epoch,train_loss,valid_loss,accuracy,perplexity,time
+0,3.375441551208496,3.369227886199951,0.3934227228164673,29.05608367919922,23:00
+...
+9,2.894167184829712,2.7784812450408936,0.46221256256103516,16.094558715820312,22:44
+```
+
 
 ## 3. Language model fine-tuning on unlabled data
 
 Notebook: `3_ulmfit_lm_finetuning.ipynb`
 
 To improve the performance on the downstream-task, the language model should be fine-tuned. We are using a Twitter dataset (GermEval2018/2019), so we fine-tune the LM on unlabled tweets.
+
+To use the notebook on your own dataset, create a `.csv`-file containing your (unlabled) data in the `text` column.
 
 ## 4. Train the classifier
 
