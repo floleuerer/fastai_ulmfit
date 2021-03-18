@@ -18,7 +18,7 @@ This Repo is based on:
 | German  | de  | 16.1  | https://tinyurl.com/ulmfit-dewiki |
 | Dutch | nl  | 20.5  | https://tinyurl.com/ulmfit-nlwiki |
 | Russian | ru  | 29.8  | https://tinyurl.com/ulmfit-ruwiki |
-| Portuguese | pt  | 17.3  | https://tinyurl.com/ulmfit-ruwiki |
+| Portuguese | pt  | 17.3  | https://tinyurl.com/ulmfit-ptwiki |
 | Mongolian | mn | | see: https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model |
 
 
