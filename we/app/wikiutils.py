@@ -2,6 +2,7 @@ import re
 import glob
 import random
 import shutil
+import json
 
 
 def split_wiki(path_extract, path_docs, lang):
@@ -65,3 +66,11 @@ def cleanup_paths(paths):
             shutil.rmtree(p)
         except Exception as e:
             print(f'Error: {e}')
+
+def save_stats(path, n_docs, n_words):
+    stats = {
+        'n_docs': n_docs,
+        'n_words': n_words
+    }
+    with open(f'{path}/wiki_stats.log', 'w') as f:
+        json.dump(stats, f, ensure_ascii=False, indent=4)

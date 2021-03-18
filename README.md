@@ -18,6 +18,8 @@ This Repo is based on:
 | German  | de  | 16.1  | https://tinyurl.com/ulmfit-dewiki |
 | Dutch | nl  | 20.5  | https://tinyurl.com/ulmfit-nlwiki |
 | Russian | ru  | 29.8  | https://tinyurl.com/ulmfit-ruwiki |
+| Portuguese | pt  | 17.3  | https://tinyurl.com/ulmfit-ruwiki |
+| Mongolian | mn | | see: https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model |
 
 
 ## Setup 
@@ -175,25 +177,33 @@ The (fine-tuned) language model now can be used to train a classifier on a small
 
 Notebook: `5_ulmfit_inference.ipynb`
 
-# Results on GermEval2019
+# Evaluation
 
+## German pretrained model
 Results with an ensemble of forward + backward model (see the inference notebook). Neither the fine-tuning of the LM, nor the training of the classifier was optimized - so there is still room for improvement.
 
 Official results: https://ids-pub.bsz-bw.de/frontdoor/deliver/index/docId/9319/file/Struss_etal._Overview_of_GermEval_task_2_2019.pdf
 
-## Task 1 Coarse Classification 
+### Task 1 Coarse Classification 
 
 Classes: OTHER, OFFENSE
 
 Accuracy: 79,68 
 F1: 75,96 (best BERT 76,95)
 
-## Task 2 Fine Classification 
+### Task 2 Fine Classification 
 
 Classes: OTHER, OFFENSE
 
 Accuracy: 74,56 %
 F1: 52,54 (best BERT 53.59)
+
+## Dutch model
+
+Compared result with: https://arxiv.org/pdf/1912.09582.pdf
+Dataset https://github.com/benjaminvdb/DBRD
+
+Accuracy 93,97 % (best BERT 93,0 %)	
 
 # Deployment as REST-API
 

@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 import argparse
 
-from wikiutils import split_wiki, sample_docs, cleanup_paths
+from wikiutils import split_wiki, sample_docs, cleanup_paths, save_stats
 
 
 parser = argparse.ArgumentParser()
@@ -96,5 +96,7 @@ if not path_lm.exists():
     n_words, n_docs = sample_docs(path_docs, path_lm, min_doc_length, number_docs)
 else: 
     print(f'{path_lm} exists - skipping sampling documents!')
+
+save_stats(path_wiki/'docs', n_docs, n_words)
 
 print(f'sucessfully prepared {name} - {path_lm}, number of docs {n_docs}/{number_docs} with {n_words} words / tokens!')
