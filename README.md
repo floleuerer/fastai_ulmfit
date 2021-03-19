@@ -1,7 +1,7 @@
 # fast.ai ULMFiT with SentencePiece from pretraining to deployment
 
 **Motivation:**
-Why even bother with a non-BERT / Transformer languag model? Short answer: you can train a state of the art text classifier with ULMFiT with limited data and affordable hardware. The whole process (preparing the Wikipedia dump, pretrain the language model, fine tune the language model and training the classifier) takes about 5 hours on my workstation with a RTX 3090. The training of the model with FP16 requires less than 8 GB VRAM - so you can train the model on affordable GPUs.
+Why even bother with a non-BERT / Transformer language model? Short answer: you can train a state of the art text classifier with ULMFiT with limited data and affordable hardware. The whole process (preparing the Wikipedia dump, pretrain the language model, fine tune the language model and training the classifier) takes about 5 hours on my workstation with a RTX 3090. The training of the model with FP16 requires less than 8 GB VRAM - so you can train the model on affordable GPUs.
 
 I also saw this paper on the roadmap for fast.ai 2.3 [Single Headed Attention RNN: Stop Thinking With Your Head](https://arxiv.org/abs/1911.11423) which could improve the performance further. 
 
@@ -13,13 +13,20 @@ This Repo is based on:
 
 ## Pretrained models
 
-| Language  | code  | Perplexity  | Download |
+| Language  | code  | Perplexity  | Download (.zip files) |
 |---|---|---|---|
 | German  | de  | 16.1  | https://tinyurl.com/ulmfit-dewiki |
 | Dutch | nl  | 20.5  | https://tinyurl.com/ulmfit-nlwiki |
 | Russian | ru  | 29.8  | https://tinyurl.com/ulmfit-ruwiki |
 | Portuguese | pt  | 17.3  | https://tinyurl.com/ulmfit-ptwiki |
+| Vietnamese | vi  | 18.8  | https://tinyurl.com/ulmfit-viwiki |
 | Mongolian | mn | | see: https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model |
+
+
+````
+# to preserve the filenames (.zip!) when downloading with wget use --content-disposition
+wget --content-disposition https://tinyurl.com/ulmfit-dewiki 
+````
 
 
 ## Setup 
@@ -200,7 +207,7 @@ F1: 52,54 (best BERT 53.59)
 
 ## Dutch model
 
-Compared result with: https://arxiv.org/pdf/1912.09582.pdf
+Compared result with: https://arxiv.org/pdf/1912.09582.pdf  
 Dataset https://github.com/benjaminvdb/DBRD
 
 Accuracy 93,97 % (best BERT 93,0 %)	
