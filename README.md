@@ -13,7 +13,7 @@ This Repo is based on:
 
 # Pretrained models
 
-| Language  | code  | Perplexity | Vocab Size | Download (.zip files) |
+| Language  | code  | Perplexity | Vocab Size | Download (.tgz files) |
 |---|---|---|---|---|
 | German  | de  | 16.1 | 15k | https://bit.ly/ulmfit-dewiki |
 | Dutch | nl  | 20.5  | 15k | https://bit.ly/ulmfit-nlwiki |
@@ -26,8 +26,8 @@ This Repo is based on:
   
 **Download with wget**
 ````
-# to preserve the filenames (.zip!) when downloading with wget use --content-disposition
-wget --content-disposition https://tinyurl.com/ulmfit-dewiki 
+# to preserve the filenames (.tgz!) when downloading with wget use --content-disposition
+wget --content-disposition https://bit.ly/ulmfit-dewiki 
 ````
 
 ## Library fastai_ulmfit.pretrained
@@ -40,6 +40,9 @@ pip install fastai-ulmfit
 **Usage**
 
 ```
+# import
+from fastai_ulmfit.pretrained import *
+
 url = 'http://bit.ly/ulmfit-dewiki'
 
 # get tokenizer
