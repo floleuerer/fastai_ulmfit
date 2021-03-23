@@ -26,8 +26,15 @@ def split_wiki(path_extract, path_docs, lang):
             title = title_re.findall(l)[0].replace('/','_')
             if len(title)>120: continue
             if f: f.close()
-            f = (dest/f'{title}.txt').open('w')
-        else: f.write(l)
+            try:
+                f = (dest/f'{title}.txt').open('w')
+            except Exception as e:
+                print('Error:', e)
+                f = None
+        elif l.startswith('</doc>'):
+            continue
+        else: 
+            if f: f.write(l)
     f.close()
     return dest
 

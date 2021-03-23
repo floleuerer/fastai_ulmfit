@@ -11,23 +11,52 @@ This Repo is based on:
 - the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
 
 
-## Pretrained models
+# Pretrained models
 
-| Language  | code  | Perplexity  | Download (.zip files) |
-|---|---|---|---|
-| German  | de  | 16.1  | https://tinyurl.com/ulmfit-dewiki |
-| Dutch | nl  | 20.5  | https://tinyurl.com/ulmfit-nlwiki |
-| Russian | ru  | 29.8  | https://tinyurl.com/ulmfit-ruwiki |
-| Portuguese | pt  | 17.3  | https://tinyurl.com/ulmfit-ptwiki |
-| Vietnamese | vi  | 18.8  | https://tinyurl.com/ulmfit-viwiki |
-| Mongolian | mn | | see: https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model |
-
-
+| Language  | code  | Perplexity | Vocab Size | Download (.zip files) |
+|---|---|---|---|---|
+| German  | de  | 16.1 | 15k | https://bit.ly/ulmfit-dewiki |
+| Dutch | nl  | 20.5  | 15k | https://bit.ly/ulmfit-nlwiki |
+| Russian | ru  | 29.8  | 15k | https://bit.ly/ulmfit-ruwiki |
+| Portuguese | pt  | 17.3 | 15k | https://bit.ly/ulmfit-ptwiki |
+| Vietnamese | vi  | 18.8 | 15k | https://bit.ly/ulmfit-viwiki |
+| Japanese | ja  | 42.6 | 15k | https://bit.ly/ulmfit-jawiki |
+| Mongolian | mn | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
+   
+  
+**Download with wget**
 ````
 # to preserve the filenames (.zip!) when downloading with wget use --content-disposition
 wget --content-disposition https://tinyurl.com/ulmfit-dewiki 
 ````
 
+## Library fastai_ulmfit.pretrained
+
+**Install with pip**
+````
+pip install fastai-ulmfit
+````
+
+**Usage**
+
+```
+url = 'http://bit.ly/ulmfit-dewiki'
+
+# get tokenizer
+tok = tokenizer_from_pretrained(url)
+
+# get language model learner for fine-tuning
+learn = language_model_from_pretrained(dls, url=url, drop_mult=0.5).to_fp16()
+
+# save fine-tuned model for classification
+path = learn.save_lm('tmp/test_lm')
+
+# get text classifier learner from fine-tuned model
+learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
+````
+
+
+# Model pretraining 
 
 ## Setup 
 
@@ -174,11 +203,24 @@ To improve the performance on the downstream-task, the language model should be 
 
 To use the notebook on your own dataset, create a `.csv`-file containing your (unlabled) data in the `text` column.
 
+Files required from the Language Model (previous step):
+- Model (*model.pth)
+- Vocab (*vocab.pkl)
+
+I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-> language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approch gave slightly better results than reusing the SP-Model from the language model.
+
 ## 4. Train the classifier
 
 Notebook: `4_ulmfit_train_classifier.ipynb`
 
-The (fine-tuned) language model now can be used to train a classifier on a small labled dataset. 
+The (fine-tuned) language model now can be used to train a classifier on a (small) labled dataset.
+
+To use the notebook on your own dataset, create a `.csv`-file containing your texts in the `text` and labels in the `label` column.
+
+Files required from the fine-tuned LM (previous step):
+- Encoder (*encoder.pth)
+- Vocab (*vocab.pkl)
+- SentencePiece-Model (spm/spm.model)
 
 ## 5. Use the classifier for predictions / inference on new data
 
@@ -200,7 +242,7 @@ F1: 75,96 (best BERT 76,95)
 
 ### Task 2 Fine Classification 
 
-Classes: OTHER, OFFENSE
+Classes: OTHER, PROFANITY, INSULT, ABUSE
 
 Accuracy: 74,56 %
 F1: 52,54 (best BERT 53.59)
@@ -211,6 +253,14 @@ Compared result with: https://arxiv.org/pdf/1912.09582.pdf
 Dataset https://github.com/benjaminvdb/DBRD
 
 Accuracy 93,97 % (best BERT 93,0 %)	
+
+## Japanese model
+Copared results with: 
+- https://github.com/laboroai/Laboro-BERT-Japanese
+- https://github.com/yoheikikuta/bert-japanese  
+  
+Livedoor news corpus   
+Accuracy 97,1% (best BERT ~98 %)
 
 # Deployment as REST-API
 
