@@ -32,6 +32,8 @@ wget --content-disposition https://bit.ly/ulmfit-dewiki
 
 ## Library fastai_ulmfit.pretrained
 
+see a tutorial here: [fastai_ulmfit_pretrained_usage.ipynb](https://github.com/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb)
+
 **Install with pip**
 ````
 pip install fastai-ulmfit
