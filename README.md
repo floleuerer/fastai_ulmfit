@@ -13,15 +13,17 @@ This Repo is based on:
 
 # Pretrained models
 
-| Language  | code  | Perplexity | Vocab Size | Download (.tgz files) |
-|---|---|---|---|---|
-| German  | de  | 16.1 | 15k | https://bit.ly/ulmfit-dewiki |
-| Dutch | nl  | 20.5  | 15k | https://bit.ly/ulmfit-nlwiki |
-| Russian | ru  | 29.8  | 15k | https://bit.ly/ulmfit-ruwiki |
-| Portuguese | pt  | 17.3 | 15k | https://bit.ly/ulmfit-ptwiki |
-| Vietnamese | vi  | 18.8 | 15k | https://bit.ly/ulmfit-viwiki |
-| Japanese | ja  | 42.6 | 15k | https://bit.ly/ulmfit-jawiki |
-| Mongolian | mn | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
+| Language | (local) | code  | Perplexity | Vocab Size | Tokenizer | Download (.tgz files) |
+|---|---|---|---|---|---|---|
+| German | Deutsch  | de  | 16.1 | 15k | SP | https://bit.ly/ulmfit-dewiki |
+| Dutch | Nederlands | nl  | 20.5  | 15k | SP | https://bit.ly/ulmfit-nlwiki |
+| Russian | Русский | ru  | 29.8  | 15k | SP | https://bit.ly/ulmfit-ruwiki |
+| Portuguese | Português | pt  | 17.3 | 15k | SP | https://bit.ly/ulmfit-ptwiki |
+| Vietnamese | Tiếng Việt | vi  | 18.8 | 15k | SP | https://bit.ly/ulmfit-viwiki |
+| Japanese | 日本語 | ja  | 42.6 | 15k | SP | https://bit.ly/ulmfit-jawiki |
+| Italian | Italiano | it  | 23.7 | 15k | SP |https://bit.ly/ulmfit-itwiki |
+| Spanish | Español | es  | 21.9 | 15k | SP |https://bit.ly/ulmfit-eswiki |
+| Mongolian | Монгол | mn | | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
    
   
 **Download with wget**

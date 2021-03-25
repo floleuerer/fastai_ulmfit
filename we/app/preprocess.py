@@ -97,6 +97,6 @@ if not path_lm.exists():
 else: 
     print(f'{path_lm} exists - skipping sampling documents!')
 
-save_stats(path_wiki/'docs', n_docs, n_words)
+save_stats(path_wiki/'docs', n_docs, n_words, min_doc_length)
 
 print(f'sucessfully prepared {name} - {path_lm}, number of docs {n_docs}/{number_docs} with {n_words} words / tokens!')

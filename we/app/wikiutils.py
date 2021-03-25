@@ -74,10 +74,11 @@ def cleanup_paths(paths):
         except Exception as e:
             print(f'Error: {e}')
 
-def save_stats(path, n_docs, n_words):
+def save_stats(path, n_docs, n_words, min_doc_length):
     stats = {
         'n_docs': n_docs,
-        'n_words': n_words
+        'n_words': n_words,
+        'min_doc_length': min_doc_length
     }
     with open(f'{path}/wiki_stats.log', 'w') as f:
         json.dump(stats, f, ensure_ascii=False, indent=4)
