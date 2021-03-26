@@ -23,6 +23,9 @@ This Repo is based on:
 | Japanese | 日本語 | ja  | 42.6 | 15k | SP | https://bit.ly/ulmfit-jawiki |
 | Italian | Italiano | it  | 23.7 | 15k | SP |https://bit.ly/ulmfit-itwiki |
 | Spanish | Español | es  | 21.9 | 15k | SP |https://bit.ly/ulmfit-eswiki |
+| Korean | 한국어 | ko  | 39.6 | 15k | SP |https://bit.ly/ulmfit-kowiki |
+| Thai | ไทย | th  | 56.4 | 15k | SP |https://bit.ly/ulmfit-thwiki |
+| Hebrew | עברית | he  | 46.3 | 15k | SP |https://bit.ly/ulmfit-hewiki |
 | Mongolian | Монгол | mn | | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
    
   
@@ -34,9 +37,10 @@ wget --content-disposition https://bit.ly/ulmfit-dewiki
 
 ## Library fastai_ulmfit.pretrained
 
-see a tutorial here: [fastai_ulmfit_pretrained_usage.ipynb](https://github.com/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb)
+Tutorial:  [fastai_ulmfit_pretrained_usage.ipynb](https://github.com/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb)
 
-**Install with pip**
+
+**Installation**
 ````
 pip install fastai-ulmfit
 ````
@@ -268,6 +272,12 @@ Copared results with:
   
 Livedoor news corpus   
 Accuracy 97,1% (best BERT ~98 %)
+
+## Korean model
+
+Compared with: https://github.com/namdori61/BERT-Korean-Classification
+Dataset: https://github.com/e9t/nsmc
+Accuracy 89,6 % (best BERT 90,1 %)
 
 # Deployment as REST-API
 
