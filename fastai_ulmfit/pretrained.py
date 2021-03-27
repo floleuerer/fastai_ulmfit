@@ -4,7 +4,7 @@ __all__ = ['tokenizer_from_pretrained', 'language_model_from_pretrained', 'text_
 
 # Cell
 import json
-from fastai.text.all import SentencePieceTokenizer, language_model_learner, \
+from fastai.text.all import SentencePieceTokenizer, SpacyTokenizer, language_model_learner, \
                             text_classifier_learner, untar_data, Path, patch, \
                             LMLearner, os, pickle, shutil, AWD_LSTM, accuracy, \
                             Perplexity, delegates
@@ -39,13 +39,17 @@ def _get_model_files(path, backwards=False):
     return fnames
 
 # Cell
-def tokenizer_from_pretrained(url, backwards=False, **kwargs):
+def tokenizer_from_pretrained(url, pretrained=False, backwards=False, **kwargs):
     path = _get_pretrained_model(url)
     direction = _get_direction(backwards)
     config = _get_config(path/direction)
-    tok = None
+    sp_model=path/'spm'/'spm.model' if pretrained else None
     if config['tokenizer']['class'] == 'SentencePieceTokenizer':
-        tok = SentencePieceTokenizer(**config['tokenizer']['params'], **kwargs)
+        tok = SentencePieceTokenizer(**config['tokenizer']['params'], sp_model=sp_model, **kwargs)
+    elif config['tokenizer']['class'] == 'SpacyTokenizer':
+        tok = SpacyTokenizer(**config['tokenizer']['params'], **kwargs)
+    else:
+        raise ValueError('Tokenizer not supported')
     return tok
 
 # Cell
@@ -84,13 +88,15 @@ def save_lm(x:LMLearner, path=None, with_encoder=True):
     with open((path/'lm_vocab.pkl').absolute(), 'wb') as f:
         pickle.dump(x.dls.vocab, f)
 
-    # copy SPM if path not spm path
-    spm_path = Path(x.dls.tok.cache_dir)
-    if path.absolute() != spm_path.absolute():
-        target_path = path/'spm'
-        if not target_path.exists(): os.makedirs(target_path, exist_ok=True)
-        shutil.copyfile(spm_path/'spm.model', target_path/'spm.model')
-        shutil.copyfile(spm_path/'spm.vocab', target_path/'spm.vocab')
+    # save tokenizer if SentencePiece is used
+    if isinstance(x.dls.tok, SentencePieceTokenizer):
+        # copy SPM if path not spm path
+        spm_path = Path(x.dls.tok.cache_dir)
+        if path.absolute() != spm_path.absolute():
+            target_path = path/'spm'
+            if not target_path.exists(): os.makedirs(target_path, exist_ok=True)
+            shutil.copyfile(spm_path/'spm.model', target_path/'spm.model')
+            shutil.copyfile(spm_path/'spm.vocab', target_path/'spm.vocab')
 
     return path
 
