@@ -26,6 +26,7 @@ This Repo is based on:
 | Korean | 한국어 | ko  | 39.6 | 15k | SP |https://bit.ly/ulmfit-kowiki |
 | Thai | ไทย | th  | 56.4 | 15k | SP |https://bit.ly/ulmfit-thwiki |
 | Hebrew | עברית | he  | 46.3 | 15k | SP |https://bit.ly/ulmfit-hewiki |
+| Arabic | العربية | ar  | 50.0 | 15k | SP |https://bit.ly/ulmfit-arwiki |
 | Mongolian | Монгол | mn | | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
    
   
@@ -97,27 +98,27 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
 .
 ├── we                         Docker image for the preperation of the Wikipedia-dump / wikiextractor
 └── data          
-    ├── {language-code}wiki    created during preperation
-    │    └── dump              downloaded Wikipedia dump
-    │        └── extract       extracted text using wikiextractor
-    ├── docs 
-    │   ├── all                all extracted Wikipedia articles as single txt-files
-    │   ├── sampled            (ampled Wikipedia articles for language model pretraining
-    │   └── sampled_tok        cached tokenized sampled articles - created by fastai / sentencepiece
-    └── model 
-        ├── lm                 language model trained in step 2
-        │   ├── fwd            forward model
-        │   ├── bwd            backwards model
-        │   └── spm            SentencePiece model
-        │
-        ├── ft                 fine tuned model trained in step 3
-        │   ├── fwd            forward model
-        │   ├── bwd            backwards model
-        │   └── spm            SentencePiece model
-        │
-        └── class              classifier trained in step 4
-            ├── fwd            forward learner
-            └── bwd            backwards learner
+    └── {language-code}wiki         
+        ├── dump                    downloaded Wikipedia dump
+        │   └── extract             extracted wikipedia-articles using wikiextractor
+        ├── docs 
+        │   ├── all                 all extracted Wikipedia articles as single txt-files
+        │   ├── sampled             sampled Wikipedia articles for language model pretraining
+        │   └── sampled_tok         cached tokenized sampled articles - created by fastai / sentencepiece
+        └── model 
+            ├── lm                  language model trained in step 2
+            │   ├── fwd             forward model
+            │   ├── bwd             backwards model
+            │   └── spm             SentencePiece model
+            │
+            ├── ft                  fine tuned model trained in step 3
+            │   ├── fwd             forward model
+            │   ├── bwd             backwards model
+            │   └── spm             SentencePiece model
+            │
+            └── class               classifier trained in step 4
+                ├── fwd             forward learner
+                └── bwd             backwards learner
 ````
 
 
