@@ -1,5 +1,7 @@
 # fast.ai ULMFiT with SentencePiece from pretraining to deployment
 
+
+
 **Motivation:**
 Why even bother with a non-BERT / Transformer language model? Short answer: you can train a state of the art text classifier with ULMFiT with limited data and affordable hardware. The whole process (preparing the Wikipedia dump, pretrain the language model, fine tune the language model and training the classifier) takes about 5 hours on my workstation with a RTX 3090. The training of the model with FP16 requires less than 8 GB VRAM - so you can train the model on affordable GPUs.
 
@@ -9,7 +11,6 @@ This Repo is based on:
 - https://github.com/fastai/fastai
 - [ULMFiT Paper](https://arxiv.org/abs/1801.06146)
 - the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
-
 
 # Pretrained models
 
@@ -28,8 +29,8 @@ This Repo is based on:
 | Hebrew | עברית | he  | 46.3 | 15k | SP |https://bit.ly/ulmfit-hewiki |
 | Arabic | العربية | ar  | 50.0 | 15k | SP |https://bit.ly/ulmfit-arwiki |
 | Mongolian | Монгол | mn | | | | see: [Github: RobertRitz](https://github.com/robertritz/NLP/tree/main/02_mongolian_language_model) |
-   
-  
+
+
 **Download with wget**
 ````
 # to preserve the filenames (.tgz!) when downloading with wget use --content-disposition
@@ -69,7 +70,6 @@ path = learn.save_lm('tmp/test_lm')
 learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
 ````
 
-
 # Model pretraining 
 
 ## Setup 
@@ -92,7 +92,6 @@ The trained language models are compatible with other fastai versions!
 ### Docker
 
 The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-docker/.
-
 
 ## Project structure
 
@@ -122,7 +121,6 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
                 ├── fwd             forward learner
                 └── bwd             backwards learner
 ````
-
 
 # Pretraining, Fine-Tuning and training of the Classifier 
 
@@ -158,8 +156,6 @@ usage: preprocess.py [-h] -l LANG [-n NUMBER_DOCS] [-m MIN_DOC_LENGTH] [--mirror
 # The Wikipedia-XML-Dump and the sampled docs will not be deleted!
 docker run -v $(pwd)/data:/data -it wikiextractor -l <language-code> --cleanup
 ```
-
-The Docker image will create the following folders
 
 ## 2. Language model pretraining on Wikipedia Dump
 
@@ -208,7 +204,6 @@ epoch,train_loss,valid_loss,accuracy,perplexity,time
 9,2.894167184829712,2.7784812450408936,0.46221256256103516,16.094558715820312,22:44
 ```
 
-
 ## 3. Language model fine-tuning on unlabled data
 
 Notebook: `3_ulmfit_lm_finetuning.ipynb`
@@ -222,6 +217,8 @@ Files required from the Language Model (previous step):
 - Vocab (*vocab.pkl)
 
 I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-> language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approch gave slightly better results than reusing the SP-Model from the language model.
+
+
 
 ## 4. Train the classifier
 
