@@ -45,7 +45,7 @@ Why even bother with a non-BERT / Transformer language model? Short answer: you 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Pretrained-models">Pretrained models<a class="anchor-link" href="#Pretrained-models"> </a></h1>
+<h2 id="Pretrained-models">Pretrained models<a class="anchor-link" href="#Pretrained-models"> </a></h2>
 </div>
 </div>
 </div>
@@ -198,7 +198,7 @@ wget --content-disposition https://bit.ly/ulmfit-dewiki</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Library-fastai_ulmfit.pretrained">Library fastai_ulmfit.pretrained<a class="anchor-link" href="#Library-fastai_ulmfit.pretrained"> </a></h2>
+<h3 id="Usage-of-pretrained-models---library-fastai_ulmfit.pretrained">Usage of pretrained models - library fastai_ulmfit.pretrained<a class="anchor-link" href="#Usage-of-pretrained-models---library-fastai_ulmfit.pretrained"> </a></h3>
 </div>
 </div>
 </div>
@@ -234,25 +234,24 @@ learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Model-pretraining">Model pretraining<a class="anchor-link" href="#Model-pretraining"> </a></h1>
+<h2 id="Model-pretraining">Model pretraining<a class="anchor-link" href="#Model-pretraining"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Setup">Setup<a class="anchor-link" href="#Setup"> </a></h2>
+<h3 id="Setup">Setup<a class="anchor-link" href="#Setup"> </a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Python-environment">Python environment<a class="anchor-link" href="#Python-environment"> </a></h3>
+<h4 id="Python-environment">Python environment<a class="anchor-link" href="#Python-environment"> </a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Tested with</strong></p>
 
 <pre><code>fastai-2.2.7
 fastcore-1.3.19
@@ -267,14 +266,14 @@ fastinference-0.0.36</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Docker">Docker<a class="anchor-link" href="#Docker"> </a></h3><p>The Wikipedia-dump preprocessing requires docker <a href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a>.</p>
+<h4 id="Docker">Docker<a class="anchor-link" href="#Docker"> </a></h4><p>The Wikipedia-dump preprocessing requires docker <a href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a>.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Project-structure">Project structure<a class="anchor-link" href="#Project-structure"> </a></h2>
+<h3 id="Project-structure">Project structure<a class="anchor-link" href="#Project-structure"> </a></h3>
 <pre><code>.
 ├── we                         Docker image for the preperation of the Wikipedia-dump / wikiextractor
 └── data          
@@ -305,13 +304,13 @@ fastinference-0.0.36</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Pretraining,-Fine-Tuning-and-training-of-the-Classifier">Pretraining, Fine-Tuning and training of the Classifier<a class="anchor-link" href="#Pretraining,-Fine-Tuning-and-training-of-the-Classifier"> </a></h1>
+<h3 id="Pretraining,-Fine-Tuning-and-training-of-the-Classifier">Pretraining, Fine-Tuning and training of the Classifier<a class="anchor-link" href="#Pretraining,-Fine-Tuning-and-training-of-the-Classifier"> </a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Prepare-Wikipedia-dump-for-pretraining">1. Prepare Wikipedia-dump for pretraining<a class="anchor-link" href="#1.-Prepare-Wikipedia-dump-for-pretraining"> </a></h2><p>ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.</p>
+<h4 id="1.-Prepare-Wikipedia-dump-for-pretraining">1. Prepare Wikipedia-dump for pretraining<a class="anchor-link" href="#1.-Prepare-Wikipedia-dump-for-pretraining"> </a></h4><p>ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.</p>
 <p>The code for the preperation steps is heavily inspired by / copied from the <strong>fast.ai NLP-course</strong>: <a href="https://github.com/fastai/course-nlp/blob/master/nlputils.py">https://github.com/fastai/course-nlp/blob/master/nlputils.py</a></p>
 <p>I built a docker container and script, that automates the following steps:
 1) Download Wikipedia XML-dump
@@ -342,9 +341,9 @@ docker run -v $(pwd)/data:/data -it wikiextractor -l &lt;language-code&gt; --cle
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Language-model-pretraining-on-Wikipedia-Dump">2. Language model pretraining on Wikipedia Dump<a class="anchor-link" href="#2.-Language-model-pretraining-on-Wikipedia-Dump"> </a></h2><p>Notebook: <code>2_ulmfit_lm_pretraining.ipynb</code></p>
+<h3 id="2.-Language-model-pretraining-on-Wikipedia-Dump">2. Language model pretraining on Wikipedia Dump<a class="anchor-link" href="#2.-Language-model-pretraining-on-Wikipedia-Dump"> </a></h3><p>Notebook: <code>2_ulmfit_lm_pretraining.ipynb</code></p>
 <p>To get the best result, you can train two seperate language models - a forward and a backward model. You'll have to run the complete notebook twice and set the <code>backwards</code> parameter accordingly. The models will be saved in seperate folders (fwd / bwd). The same applies to fine-tuning and training of the classifier.</p>
-<h3 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h3><p>Change the following parameters according to your needs:</p>
+<h4 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h4><p>Change the following parameters according to your needs:</p>
 
 <pre><code>lang = 'de' # language of the Wikipedia-Dump
 backwards = False # Train backwards model? Default: False for forward model
@@ -352,7 +351,7 @@ bs=128 # batch size
 vocab_sz = 15000 # vocab size - 15k / 30k work fine with sentence piece
 num_workers=18 # num_workers for the dataloaders
 step = 'lm' # language model - don't change</code></pre>
-<h3 id="Logfiles">Logfiles<a class="anchor-link" href="#Logfiles"> </a></h3><p><code>train_params.json</code> contains the <strong>parameters</strong> the language model was trained with and the <strong>statistics</strong> (looses and metrics) of the last epoch</p>
+<h4 id="Training-Logs-+-config">Training Logs + config<a class="anchor-link" href="#Training-Logs-+-config"> </a></h4><p><code>model.json</code> contains the <strong>parameters</strong> the language model was trained with and the <strong>statistics</strong> (looses and metrics) of the last epoch</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;lang&quot;</span><span class="p">:</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span>
     <span class="nt">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;lm&quot;</span><span class="p">,</span>
@@ -382,7 +381,7 @@ step = 'lm' # language model - don't change</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Language-model-fine-tuning-on-unlabled-data">3. Language model fine-tuning on unlabled data<a class="anchor-link" href="#3.-Language-model-fine-tuning-on-unlabled-data"> </a></h2><p>Notebook: <code>3_ulmfit_lm_finetuning.ipynb</code></p>
+<h3 id="3.-Language-model-fine-tuning-on-unlabled-data">3. Language model fine-tuning on unlabled data<a class="anchor-link" href="#3.-Language-model-fine-tuning-on-unlabled-data"> </a></h3><p>Notebook: <code>3_ulmfit_lm_finetuning.ipynb</code></p>
 <p>To improve the performance on the downstream-task, the language model should be fine-tuned. We are using a Twitter dataset (GermEval2018/2019), so we fine-tune the LM on unlabled tweets.</p>
 <p>To use the notebook on your own dataset, create a <code>.csv</code>-file containing your (unlabled) data in the <code>text</code> column.</p>
 <p>Files required from the Language Model (previous step):</p>
@@ -397,7 +396,7 @@ step = 'lm' # language model - don't change</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Train-the-classifier">4. Train the classifier<a class="anchor-link" href="#4.-Train-the-classifier"> </a></h2><p>Notebook: <code>4_ulmfit_train_classifier.ipynb</code></p>
+<h3 id="4.-Train-the-classifier">4. Train the classifier<a class="anchor-link" href="#4.-Train-the-classifier"> </a></h3><p>Notebook: <code>4_ulmfit_train_classifier.ipynb</code></p>
 <p>The (fine-tuned) language model now can be used to train a classifier on a (small) labled dataset.</p>
 <p>To use the notebook on your own dataset, create a <code>.csv</code>-file containing your texts in the <code>text</code> and labels in the <code>label</code> column.</p>
 <p>Files required from the fine-tuned LM (previous step):</p>
@@ -412,32 +411,32 @@ step = 'lm' # language model - don't change</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-Use-the-classifier-for-predictions-/-inference-on-new-data">5. Use the classifier for predictions / inference on new data<a class="anchor-link" href="#5.-Use-the-classifier-for-predictions-/-inference-on-new-data"> </a></h2><p>Notebook: <code>5_ulmfit_inference.ipynb</code></p>
+<h3 id="5.-Use-the-classifier-for-predictions-/-inference-on-new-data">5. Use the classifier for predictions / inference on new data<a class="anchor-link" href="#5.-Use-the-classifier-for-predictions-/-inference-on-new-data"> </a></h3><p>Notebook: <code>5_ulmfit_inference.ipynb</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Evaluation">Evaluation<a class="anchor-link" href="#Evaluation"> </a></h1><h2 id="German-pretrained-model">German pretrained model<a class="anchor-link" href="#German-pretrained-model"> </a></h2><p>Results with an ensemble of forward + backward model (see the inference notebook). Neither the fine-tuning of the LM, nor the training of the classifier was optimized - so there is still room for improvement.</p>
+<h2 id="Evaluation">Evaluation<a class="anchor-link" href="#Evaluation"> </a></h2><h3 id="German-pretrained-model">German pretrained model<a class="anchor-link" href="#German-pretrained-model"> </a></h3><p>Results with an ensemble of forward + backward model (see the inference notebook). Neither the fine-tuning of the LM, nor the training of the classifier was optimized - so there is still room for improvement.</p>
 <p>Official results: <a href="https://ids-pub.bsz-bw.de/frontdoor/deliver/index/docId/9319/file/Struss_etal._Overview_of_GermEval_task_2_2019.pdf">https://ids-pub.bsz-bw.de/frontdoor/deliver/index/docId/9319/file/Struss_etal._Overview_of_GermEval_task_2_2019.pdf</a></p>
-<h3 id="Task-1-Coarse-Classification">Task 1 Coarse Classification<a class="anchor-link" href="#Task-1-Coarse-Classification"> </a></h3><p>Classes: OTHER, OFFENSE</p>
+<h4 id="Task-1-Coarse-Classification">Task 1 Coarse Classification<a class="anchor-link" href="#Task-1-Coarse-Classification"> </a></h4><p>Classes: OTHER, OFFENSE</p>
 <p>Accuracy: 79,68 
 F1: 75,96 (best BERT 76,95)</p>
-<h3 id="Task-2-Fine-Classification">Task 2 Fine Classification<a class="anchor-link" href="#Task-2-Fine-Classification"> </a></h3><p>Classes: OTHER, PROFANITY, INSULT, ABUSE</p>
+<h4 id="Task-2-Fine-Classification">Task 2 Fine Classification<a class="anchor-link" href="#Task-2-Fine-Classification"> </a></h4><p>Classes: OTHER, PROFANITY, INSULT, ABUSE</p>
 <p>Accuracy: 74,56 %
 F1: 52,54 (best BERT 53.59)</p>
-<h2 id="Dutch-model">Dutch model<a class="anchor-link" href="#Dutch-model"> </a></h2><p>Compared result with: <a href="https://arxiv.org/pdf/1912.09582.pdf">https://arxiv.org/pdf/1912.09582.pdf</a><br>
+<h3 id="Dutch-model">Dutch model<a class="anchor-link" href="#Dutch-model"> </a></h3><p>Compared result with: <a href="https://arxiv.org/pdf/1912.09582.pdf">https://arxiv.org/pdf/1912.09582.pdf</a><br>
 Dataset <a href="https://github.com/benjaminvdb/DBRD">https://github.com/benjaminvdb/DBRD</a></p>
 <p>Accuracy 93,97 % (best BERT 93,0 %)</p>
-<h2 id="Japanese-model">Japanese model<a class="anchor-link" href="#Japanese-model"> </a></h2><p>Copared results with:</p>
+<h3 id="Japanese-model">Japanese model<a class="anchor-link" href="#Japanese-model"> </a></h3><p>Copared results with:</p>
 <ul>
 <li><a href="https://github.com/laboroai/Laboro-BERT-Japanese">https://github.com/laboroai/Laboro-BERT-Japanese</a></li>
 <li><a href="https://github.com/yoheikikuta/bert-japanese">https://github.com/yoheikikuta/bert-japanese</a>  </li>
 </ul>
 <p>Livedoor news corpus<br>
 Accuracy 97,1% (best BERT ~98 %)</p>
-<h2 id="Korean-model">Korean model<a class="anchor-link" href="#Korean-model"> </a></h2><p>Compared with: <a href="https://github.com/namdori61/BERT-Korean-Classification">https://github.com/namdori61/BERT-Korean-Classification</a>
+<h3 id="Korean-model">Korean model<a class="anchor-link" href="#Korean-model"> </a></h3><p>Compared with: <a href="https://github.com/namdori61/BERT-Korean-Classification">https://github.com/namdori61/BERT-Korean-Classification</a>
 Dataset: <a href="https://github.com/e9t/nsmc">https://github.com/e9t/nsmc</a>
 Accuracy 89,6 % (best BERT 90,1 %)</p>
 
@@ -446,7 +445,14 @@ Accuracy 89,6 % (best BERT 90,1 %)</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Deployment-as-REST-API">Deployment as REST-API<a class="anchor-link" href="#Deployment-as-REST-API"> </a></h1><p>see <a href="https://github.com/floleuerer/fastai-docker-deploy">https://github.com/floleuerer/fastai-docker-deploy</a></p>
+<h2 id="Deployment-as-REST-API">Deployment as REST-API<a class="anchor-link" href="#Deployment-as-REST-API"> </a></h2><p>see <a href="https://github.com/floleuerer/fastai-docker-deploy">https://github.com/floleuerer/fastai-docker-deploy</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>.</p>
 
 </div>
 </div>

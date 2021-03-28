@@ -12,8 +12,7 @@ This Repo is based on:
 - [ULMFiT Paper](https://arxiv.org/abs/1801.06146)
 - the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
 
-
-# Pretrained models
+## Pretrained models
 
 | Language | (local) | code  | Perplexity | Vocab Size | Tokenizer | Download (.tgz files) |
 |---|---|---|---|---|---|---|
@@ -38,7 +37,7 @@ This Repo is based on:
 wget --content-disposition https://bit.ly/ulmfit-dewiki 
 ````
 
-## Library fastai_ulmfit.pretrained
+### Usage of pretrained models - library fastai_ulmfit.pretrained
 
 I've written a small library around this repo, to easily use the pretrained models. You don't have to bother with model, vocab and tokenizer files and paths - the following functions will take care of that. 
 
@@ -71,13 +70,12 @@ path = learn.save_lm('tmp/test_lm')
 learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
 ````
 
-# Model pretraining 
+## Model pretraining 
 
-## Setup 
+### Setup 
 
-### Python environment
+#### Python environment
 
-**Tested with**
 ```
 fastai-2.2.7
 fastcore-1.3.19
@@ -90,11 +88,11 @@ fastinference-0.0.36
 
 The trained language models are compatible with other fastai versions!
 
-### Docker
+#### Docker
 
 The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-docker/.
 
-## Project structure
+### Project structure
 
 ````
 .
@@ -123,9 +121,9 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
                 └── bwd             backwards learner
 ````
 
-# Pretraining, Fine-Tuning and training of the Classifier 
+### Pretraining, Fine-Tuning and training of the Classifier 
 
-## 1. Prepare Wikipedia-dump for pretraining
+#### 1. Prepare Wikipedia-dump for pretraining
 
 ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.
 
@@ -158,13 +156,13 @@ usage: preprocess.py [-h] -l LANG [-n NUMBER_DOCS] [-m MIN_DOC_LENGTH] [--mirror
 docker run -v $(pwd)/data:/data -it wikiextractor -l <language-code> --cleanup
 ```
 
-## 2. Language model pretraining on Wikipedia Dump
+### 2. Language model pretraining on Wikipedia Dump
 
 Notebook: `2_ulmfit_lm_pretraining.ipynb`
 
 To get the best result, you can train two seperate language models - a forward and a backward model. You'll have to run the complete notebook twice and set the `backwards` parameter accordingly. The models will be saved in seperate folders (fwd / bwd). The same applies to fine-tuning and training of the classifier.
 
-### Parameters 
+#### Parameters 
 
 Change the following parameters according to your needs:
 ```
@@ -175,9 +173,9 @@ vocab_sz = 15000 # vocab size - 15k / 30k work fine with sentence piece
 num_workers=18 # num_workers for the dataloaders
 step = 'lm' # language model - don't change
 ```
-### Logfiles
+#### Training Logs + config
 
-`train_params.json` contains the **parameters** the language model was trained with and the **statistics** (looses and metrics) of the last epoch 
+`model.json` contains the **parameters** the language model was trained with and the **statistics** (looses and metrics) of the last epoch 
 ```json
 {
     "lang": "de",
@@ -205,7 +203,7 @@ epoch,train_loss,valid_loss,accuracy,perplexity,time
 9,2.894167184829712,2.7784812450408936,0.46221256256103516,16.094558715820312,22:44
 ```
 
-## 3. Language model fine-tuning on unlabled data
+### 3. Language model fine-tuning on unlabled data
 
 Notebook: `3_ulmfit_lm_finetuning.ipynb`
 
@@ -221,7 +219,7 @@ I am not reusing the SentencePiece-Model from the language model! This could lea
 
 
 
-## 4. Train the classifier
+### 4. Train the classifier
 
 Notebook: `4_ulmfit_train_classifier.ipynb`
 
@@ -234,39 +232,39 @@ Files required from the fine-tuned LM (previous step):
 - Vocab (*vocab.pkl)
 - SentencePiece-Model (spm/spm.model)
 
-## 5. Use the classifier for predictions / inference on new data
+### 5. Use the classifier for predictions / inference on new data
 
 Notebook: `5_ulmfit_inference.ipynb`
 
-# Evaluation
+## Evaluation
 
-## German pretrained model
+### German pretrained model
 Results with an ensemble of forward + backward model (see the inference notebook). Neither the fine-tuning of the LM, nor the training of the classifier was optimized - so there is still room for improvement.
 
 Official results: https://ids-pub.bsz-bw.de/frontdoor/deliver/index/docId/9319/file/Struss_etal._Overview_of_GermEval_task_2_2019.pdf
 
-### Task 1 Coarse Classification 
+#### Task 1 Coarse Classification 
 
 Classes: OTHER, OFFENSE
 
 Accuracy: 79,68 
 F1: 75,96 (best BERT 76,95)
 
-### Task 2 Fine Classification 
+#### Task 2 Fine Classification 
 
 Classes: OTHER, PROFANITY, INSULT, ABUSE
 
 Accuracy: 74,56 %
 F1: 52,54 (best BERT 53.59)
 
-## Dutch model
+### Dutch model
 
 Compared result with: https://arxiv.org/pdf/1912.09582.pdf  
 Dataset https://github.com/benjaminvdb/DBRD
 
 Accuracy 93,97 % (best BERT 93,0 %)	
 
-## Japanese model
+### Japanese model
 Copared results with: 
 - https://github.com/laboroai/Laboro-BERT-Japanese
 - https://github.com/yoheikikuta/bert-japanese  
@@ -274,12 +272,14 @@ Copared results with:
 Livedoor news corpus   
 Accuracy 97,1% (best BERT ~98 %)
 
-## Korean model
+### Korean model
 
 Compared with: https://github.com/namdori61/BERT-Korean-Classification
 Dataset: https://github.com/e9t/nsmc
 Accuracy 89,6 % (best BERT 90,1 %)
 
-# Deployment as REST-API
+## Deployment as REST-API
 
 see https://github.com/floleuerer/fastai-docker-deploy
+
+.
