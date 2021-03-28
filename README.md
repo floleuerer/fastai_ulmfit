@@ -12,6 +12,7 @@ This Repo is based on:
 - [ULMFiT Paper](https://arxiv.org/abs/1801.06146)
 - the fast.ai NLP-course repository: https://github.com/fastai/course-nlp
 
+
 # Pretrained models
 
 | Language | (local) | code  | Perplexity | Vocab Size | Tokenizer | Download (.tgz files) |
