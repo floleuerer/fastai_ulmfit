@@ -38,6 +38,8 @@ wget --content-disposition https://bit.ly/ulmfit-dewiki
 
 ## Library fastai_ulmfit.pretrained
 
+I've written a small library around this repo, to easily use the pretrained models. You don't have to bother with model, vocab and tokenizer files and paths - the following functions will take care of that. 
+
 Tutorial:  [fastai_ulmfit_pretrained_usage.ipynb](https://github.com/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/floleuerer/fastai_ulmfit/blob/main/fastai_ulmfit_pretrained_usage.ipynb)
 
 
@@ -54,8 +56,8 @@ from fastai_ulmfit.pretrained import *
 
 url = 'http://bit.ly/ulmfit-dewiki'
 
-# get tokenizer
-tok = tokenizer_from_pretrained(url)
+# get tokenizer - if pretrained=True, the SentencePiece Model used for language model pretraining will be used. Default: False 
+tok = tokenizer_from_pretrained(url, pretrained=False)
 
 # get language model learner for fine-tuning
 learn = language_model_from_pretrained(dls, url=url, drop_mult=0.5).to_fp16()
