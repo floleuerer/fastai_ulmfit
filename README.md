@@ -121,9 +121,7 @@ The Wikipedia-dump preprocessing requires docker https://docs.docker.com/get-doc
                 └── bwd             backwards learner
 ````
 
-### Pretraining, Fine-Tuning and training of the Classifier 
-
-#### 1. Prepare Wikipedia-dump for pretraining
+### 1. Prepare Wikipedia-dump for pretraining
 
 ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.
 

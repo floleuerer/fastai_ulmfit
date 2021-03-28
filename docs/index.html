@@ -304,13 +304,7 @@ fastinference-0.0.36</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pretraining,-Fine-Tuning-and-training-of-the-Classifier">Pretraining, Fine-Tuning and training of the Classifier<a class="anchor-link" href="#Pretraining,-Fine-Tuning-and-training-of-the-Classifier"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.-Prepare-Wikipedia-dump-for-pretraining">1. Prepare Wikipedia-dump for pretraining<a class="anchor-link" href="#1.-Prepare-Wikipedia-dump-for-pretraining"> </a></h4><p>ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.</p>
+<h3 id="1.-Prepare-Wikipedia-dump-for-pretraining">1. Prepare Wikipedia-dump for pretraining<a class="anchor-link" href="#1.-Prepare-Wikipedia-dump-for-pretraining"> </a></h3><p>ULMFiT can be peretrained on relativly small datasets - 100 million tokens are sufficient to get state-of-the art classification results (compared to Transformer models as BERT, which need huge amounts of training data). The easiest way is to pretrain a language model on Wikipedia.</p>
 <p>The code for the preperation steps is heavily inspired by / copied from the <strong>fast.ai NLP-course</strong>: <a href="https://github.com/fastai/course-nlp/blob/master/nlputils.py">https://github.com/fastai/course-nlp/blob/master/nlputils.py</a></p>
 <p>I built a docker container and script, that automates the following steps:
 1) Download Wikipedia XML-dump
