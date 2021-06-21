@@ -5,6 +5,7 @@ archive
 modelhub
 _test/
 models/
+_hf/
 
 *.bak
 .gitattributes
