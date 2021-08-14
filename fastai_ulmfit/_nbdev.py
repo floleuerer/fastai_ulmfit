@@ -5,9 +5,11 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"tokenizer_from_pretrained": "00_pretrained.ipynb",
          "language_model_from_pretrained": "00_pretrained.ipynb",
          "LMLearner.save_lm": "00_pretrained.ipynb",
-         "text_classifier_from_lm": "00_pretrained.ipynb"}
+         "text_classifier_from_lm": "00_pretrained.ipynb",
+         "SentenceEmbeddingCallback": "01_embeddings.ipynb"}
 
-modules = ["pretrained.py"]
+modules = ["pretrained.py",
+           "embeddings.py"]
 
 doc_url = "https://floleuerer.github.io/fastai_ulmfit/"
 

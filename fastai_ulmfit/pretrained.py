@@ -26,6 +26,17 @@ def _get_direction(backwards):
     return 'bwd' if backwards else 'fwd'
 
 # Cell
+def _get_class(classname):
+    cls = None
+    if len(classname.split('.')) > 1:
+        comp = classname.rsplit('.', 1)
+        imported = import_module(comp[0])
+        cls = getattr(imported, comp[1])
+    else:
+        cls = globals()[classname]
+    return cls
+
+# Cell
 def _get_model_files(path, backwards=False):
     direction = _get_direction(backwards)
     config = _get_config(path/direction)
@@ -43,13 +54,13 @@ def tokenizer_from_pretrained(url, pretrained=False, backwards=False, **kwargs):
     path = _get_pretrained_model(url)
     direction = _get_direction(backwards)
     config = _get_config(path/direction)
-    sp_model=path/'spm'/'spm.model' if pretrained else None
+
     if config['tokenizer']['class'] == 'SentencePieceTokenizer':
-        tok = SentencePieceTokenizer(**config['tokenizer']['params'], sp_model=sp_model, **kwargs)
-    elif config['tokenizer']['class'] == 'SpacyTokenizer':
-        tok = SpacyTokenizer(**config['tokenizer']['params'], **kwargs)
-    else:
-        raise ValueError('Tokenizer not supported')
+        if pretrained: config['tokenizer']['params']['sp_model'] = path/'spm'/'spm.model'
+
+    tok_cls = _get_class(config['tokenizer']['class'])
+    tok = tok_cls(**config['tokenizer']['params'])
+
     return tok
 
 # Cell
@@ -103,7 +114,7 @@ def save_lm(x:LMLearner, path=None, with_encoder=True):
 # Cell
 @delegates(text_classifier_learner)
 def text_classifier_from_lm(dls, path=None, backwards=False, **kwargs):
-    arch = AWD_LSTM # TODO: Read from config
+    arch = AWD_LSTM # TODO: Read from config / _get_class()
     path = _get_model_path(path=path)
     learn = text_classifier_learner(dls, arch, pretrained=False, **kwargs)
     learn.load_encoder((path/'lm_encoder').absolute())
