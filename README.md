@@ -17,6 +17,7 @@ This Repo is based on:
 | Language | (local) | code  | Perplexity | Vocab Size | Tokenizer | Download (.tgz files) |
 |---|---|---|---|---|---|---|
 | German | Deutsch  | de  | 16.1 | 15k | SP | https://bit.ly/ulmfit-dewiki |
+| German | Deutsch  | de  | 18.5 | 30k | SP | https://bit.ly/ulmfit-dewiki-30k |
 | Dutch | Nederlands | nl  | 20.5  | 15k | SP | https://bit.ly/ulmfit-nlwiki |
 | Russian | Русский | ru  | 29.8  | 15k | SP | https://bit.ly/ulmfit-ruwiki |
 | Portuguese | Português | pt  | 17.3 | 15k | SP | https://bit.ly/ulmfit-ptwiki |
