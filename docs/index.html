@@ -235,6 +235,28 @@ learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Extract-Sentence-Embeddings">Extract Sentence Embeddings<a class="anchor-link" href="#Extract-Sentence-Embeddings"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>from fastai_ulmfit.embeddings import SentenceEmbeddingCallback
+
+se = SentenceEmbeddingCallback(pool_mode='concat')
+_ = learn.get_preds(cbs=[se])
+
+feat = se.feat
+pca = PCA(n_components=2)
+pca.fit(feat['vec'])
+coords = pca.transform(feat['vec'])</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Model-pretraining">Model pretraining<a class="anchor-link" href="#Model-pretraining"> </a></h2>
 </div>
 </div>

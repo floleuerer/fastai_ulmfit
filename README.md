@@ -17,7 +17,6 @@ This Repo is based on:
 | Language | (local) | code  | Perplexity | Vocab Size | Tokenizer | Download (.tgz files) |
 |---|---|---|---|---|---|---|
 | German | Deutsch  | de  | 16.1 | 15k | SP | https://bit.ly/ulmfit-dewiki |
-| German | Deutsch  | de  | 18.5 | 30k | SP | https://bit.ly/ulmfit-dewiki-30k |
 | Dutch | Nederlands | nl  | 20.5  | 15k | SP | https://bit.ly/ulmfit-nlwiki |
 | Russian | Русский | ru  | 29.8  | 15k | SP | https://bit.ly/ulmfit-ruwiki |
 | Portuguese | Português | pt  | 17.3 | 15k | SP | https://bit.ly/ulmfit-ptwiki |
@@ -70,6 +69,20 @@ path = learn.save_lm('tmp/test_lm')
 # get text classifier learner from fine-tuned model
 learn = text_classifier_from_lm(dls, path=path, metrics=[accuracy]).to_fp16()
 ````
+
+### Extract Sentence Embeddings
+
+```
+from fastai_ulmfit.embeddings import SentenceEmbeddingCallback
+
+se = SentenceEmbeddingCallback(pool_mode='concat')
+_ = learn.get_preds(cbs=[se])
+
+feat = se.feat
+pca = PCA(n_components=2)
+pca.fit(feat['vec'])
+coords = pca.transform(feat['vec'])
+```
 
 ## Model pretraining 
 
