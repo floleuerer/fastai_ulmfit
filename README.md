@@ -228,7 +228,7 @@ Files required from the Language Model (previous step):
 - Model (*model.pth)
 - Vocab (*vocab.pkl)
 
-I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-> language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approch gave slightly better results than reusing the SP-Model from the language model.
+I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-> language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approach gave slightly better results than reusing the SP-Model from the language model.
 
 
 
