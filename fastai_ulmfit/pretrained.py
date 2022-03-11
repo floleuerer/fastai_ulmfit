@@ -37,12 +37,16 @@ def _get_class(classname):
     return cls
 
 # Cell
-def _get_model_files(path, backwards=False):
+def _get_model_files(path, backwards=False, encoder=False):
     direction = _get_direction(backwards)
-    config = _get_config(path/direction)
+    #config = _get_config(path/direction)
     try:
         model_path = path/direction
-        model_file = list(model_path.glob(f'*model.pth'))[0]
+        if encoder:
+            model_file = list(model_path.glob(f'*encoder.pth'))[0]
+        else:
+            model_file = list(model_path.glob(f'*model.pth'))[0]
+
         vocab_file = list(model_path.glob(f'*vocab.pkl'))[0]
         fnames = [model_file.absolute(),vocab_file.absolute()]
     except IndexError: print(f'The model in {model_path} is incomplete, download again'); raise
@@ -68,7 +72,7 @@ def tokenizer_from_pretrained(url, pretrained=False, backwards=False, **kwargs):
 def language_model_from_pretrained(dls, url=None, backwards=False, metrics=None, **kwargs):
     arch = AWD_LSTM # TODO: Read from config
     path = _get_pretrained_model(url)
-    fnames = _get_model_files(path)
+    fnames = _get_model_files(path, backwards=backwards)
     metrics = [accuracy, Perplexity()] if metrics == None else metrics
     return language_model_learner(dls,
                                   arch,
@@ -85,18 +89,22 @@ def _get_model_path(learn=None, path=None):
 
 # Cell
 @patch
-def save_lm(x:LMLearner, path=None, with_encoder=True):
+def save_lm(x:LMLearner, path=None, with_encoder=True, backwards=False):
     path = _get_model_path(x, path)
+    direction = _get_direction(backwards)
+    model_path = path/direction
+    if not model_path.exists(): os.makedirs(model_path, exist_ok=True)
+
     x.to_fp32()
     # save model
-    x.save((path/'lm_model').absolute(), with_opt=False)
+    x.save((model_path/'lm_model').absolute(), with_opt=False)
 
     # save encoder
     if with_encoder:
-        x.save_encoder((path/'lm_encoder').absolute())
+        x.save_encoder((model_path/'lm_encoder').absolute())
 
     # save vocab
-    with open((path/'lm_vocab.pkl').absolute(), 'wb') as f:
+    with open((model_path/'lm_vocab.pkl').absolute(), 'wb') as f:
         pickle.dump(x.dls.vocab, f)
 
     # save tokenizer if SentencePiece is used
@@ -116,6 +124,7 @@ def save_lm(x:LMLearner, path=None, with_encoder=True):
 def text_classifier_from_lm(dls, path=None, backwards=False, **kwargs):
     arch = AWD_LSTM # TODO: Read from config / _get_class()
     path = _get_model_path(path=path)
+    fnames = _get_model_files(path, backwards=backwards, encoder=True)
     learn = text_classifier_learner(dls, arch, pretrained=False, **kwargs)
-    learn.load_encoder((path/'lm_encoder').absolute())
+    learn.load_encoder(fnames[0])
     return learn

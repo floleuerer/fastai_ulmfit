@@ -2,6 +2,7 @@
 
 title: Pretrained
 
+
 keywords: fastai
 sidebar: home_sidebar
 
@@ -21,6 +22,13 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 <div class="container" id="notebook-container">
         
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -87,13 +95,6 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -101,7 +102,7 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tokenizer_from_pretrained" class="doc_header"><code>tokenizer_from_pretrained</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tokenizer_from_pretrained</code>(<strong><code>url</code></strong>, <strong><code>pretrained</code></strong>=<em><code>False</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="tokenizer_from_pretrained" class="doc_header"><code>tokenizer_from_pretrained</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tokenizer_from_pretrained</code>(<strong><code>url</code></strong>, <strong><code>pretrained</code></strong>=<em><code>False</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -110,6 +111,13 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -122,18 +130,11 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create <code>langauge_model_learner</code> from pretrained model-URL. All parameters will be passed to <code>language_model_learner</code>. The following parameters are set automatically: <code>arch</code>, <code>pretrained</code> and <code>pretrained_fnames</code>. By default <code>accuracy</code> and <code>perplexity</code> are passed as <code>metrics</code>.</p>
+<p>Create <code>langauge_model_learner</code> from pretrained model-URL. All parameters will be passed to <code>language_model_learner</code>. The following parameters are set automatically: <code>arch</code>, <a href="/fastai_ulmfit/pretrained.html"><code>pretrained</code></a> and <code>pretrained_fnames</code>. By default <code>accuracy</code> and <code>perplexity</code> are passed as <code>metrics</code>.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -145,7 +146,7 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="language_model_from_pretrained" class="doc_header"><code>language_model_from_pretrained</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L56" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>language_model_from_pretrained</code>(<strong><code>dls</code></strong>, <strong><code>url</code></strong>=<em><code>None</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>drop_mult</code></strong>=<em><code>1.0</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_fnames</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>)</p>
+<h4 id="language_model_from_pretrained" class="doc_header"><code>language_model_from_pretrained</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>language_model_from_pretrained</code>(<strong><code>dls</code></strong>, <strong><code>url</code></strong>=<em><code>None</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>drop_mult</code></strong>=<em><code>1.0</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>pretrained_fnames</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>)</p>
 </blockquote>
 
 </div>
@@ -154,6 +155,13 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -182,13 +190,6 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -196,7 +197,7 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="LMLearner.save_lm" class="doc_header"><code>LMLearner.save_lm</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>LMLearner.save_lm</code>(<strong><code>x</code></strong>:<code>LMLearner</code>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>with_encoder</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="LMLearner.save_lm" class="doc_header"><code>LMLearner.save_lm</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>LMLearner.save_lm</code>(<strong><code>x</code></strong>:<code>LMLearner</code>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>with_encoder</code></strong>=<em><code>True</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -205,6 +206,13 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -262,13 +270,6 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -276,7 +277,7 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="text_classifier_from_lm" class="doc_header"><code>text_classifier_from_lm</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>text_classifier_from_lm</code>(<strong><code>dls</code></strong>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong><code>seq_len</code></strong>=<em><code>72</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>drop_mult</code></strong>=<em><code>0.5</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>None</code></em>, <strong><code>max_len</code></strong>=<em><code>1440</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>)</p>
+<h4 id="text_classifier_from_lm" class="doc_header"><code>text_classifier_from_lm</code><a href="https://github.com/floleuerer/fastai_ulmfit/tree/main/fastai_ulmfit/pretrained.py#L123" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>text_classifier_from_lm</code>(<strong><code>dls</code></strong>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>backwards</code></strong>=<em><code>False</code></em>, <strong><code>seq_len</code></strong>=<em><code>72</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>drop_mult</code></strong>=<em><code>0.5</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>None</code></em>, <strong><code>max_len</code></strong>=<em><code>1440</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>)</p>
 </blockquote>
 
 </div>
@@ -285,6 +286,13 @@ nb_path: "lib_nbs/00_pretrained.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}

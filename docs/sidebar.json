@@ -1,6 +1,7 @@
 {
   "fastai_ulmfit": {
     "Overview": "/",
-    "Pretrained": "pretrained.html"
+    "Pretrained": "pretrained.html",
+    "Sentence Embedding Callback": "embeddings.html"
   }
 }

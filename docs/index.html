@@ -182,6 +182,15 @@ Why even bother with a non-BERT / Transformer language model? Short answer: you 
 <td><a href="https://bit.ly/ulmfit-arwiki">https://bit.ly/ulmfit-arwiki</a></td>
 </tr>
 <tr>
+<td>Ukrainian</td>
+<td>Українська</td>
+<td>uk</td>
+<td>32.0</td>
+<td>15k</td>
+<td>SP</td>
+<td><a href="https://bit.ly/ulmfit-ukwiki">https://bit.ly/ulmfit-ukwiki</a></td>
+</tr>
+<tr>
 <td>Mongolian</td>
 <td>Монгол</td>
 <td>mn</td>
@@ -415,7 +424,7 @@ step = 'lm' # language model - don't change</code></pre>
 <li>Model (*model.pth)</li>
 <li>Vocab (*vocab.pkl)</li>
 </ul>
-<p>I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-&gt; language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approch gave slightly better results than reusing the SP-Model from the language model.</p>
+<p>I am not reusing the SentencePiece-Model from the language model! This could lead to slightly different tokenization but fast.ai (-&gt; language_model_learner()) and the fine-tuning takes care of adding and training unknown tokens! This approach gave slightly better results than reusing the SP-Model from the language model.</p>
 
 </div>
 </div>

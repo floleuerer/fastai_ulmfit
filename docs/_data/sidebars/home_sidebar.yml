@@ -12,6 +12,9 @@ entries:
     - output: web,pdf
       title: Pretrained
       url: pretrained.html
+    - output: web,pdf
+      title: Sentence Embedding Callback
+      url: embeddings.html
     output: web
     title: fastai_ulmfit
   output: web
